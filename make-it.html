@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>What Is - Glitch Art</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        html {background: seagreen;}
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: seagreen;
+            color: #fff;
+        }
+
+        .slider-back {
+            position: absolute;
+            width: 90vw;
+            height: 85vh;
+            background-color: black;
+            border-radius: 10px;
+        }
+
+        .guide{
+            transform: translate(20px, 30px);
+        }
+
+        .guide h2{
+            font-size: 26px;
+            padding-bottom: 20px;
+        }
+
+        #slider {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            overflow: hidden;
+            background-color: black;
+            top: 12%;
+
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 100%;
+            transition: left 0.5s ease;
+        }
+
+        .slide.active {
+            left: 0;
+        }
+
+        #slide-3{
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .grid-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+        }
+
+        .grid {
+            position: absolute;
+            cursor: grab;
+            transition: transform 0.3s, opacity 0.3s;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .grid img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .grid.dragging {
+            opacity: 0.8;
+        }
+
+        .grid.active {
+            filter: brightness(1.5) saturate(1.3); 
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.05) 5px, rgba(255,255,255,0.05) 10px);
+        }
+
+        .horizontal-effect .grid.active {
+            filter: hue-rotate(180deg) invert(1); 
+        }
+
+        #reset-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transform: translateY(40%);
+            z-index: 2;
+            border: 2px solid white;
+        }
+
+        #reset-button:hover {
+            background-color: white;
+            border: 2px solid black;
+            color: black;
+        }
+
+        #navigation {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #888;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav-dot.active {
+            background-color: #fff;
+        }
+
+        .container[data-version="horizontal"] .grid {
+            width: calc(100% / 30);
+            height: 100%;
+        }
+
+        .container[data-version="grid"] .grid {
+            width: calc(100% / 10);
+            height: calc(100% / 5);
+        }
+
+        .container[data-version="dots"] .grid {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .arrow {
+            position: absolute;
+            top: 52%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: background-color 0.3s;
+            transform: translateY(-50%);
+        }
+
+        .arrow:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .arrow.left {
+            left: 10px;
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .arrow.right {
+            right: 10px;
+        }
+
+        .arrow:before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid #111;
+            border-right: 2px solid #111;
+            transform: rotate(135deg);
+            display: inline-block;
+        }
+
+        .arrow.right:before {
+            transform: rotate(45deg);
+        }
+
+        .content-container{
+            position: absolute;
+            top: 53%;
+            left: -50px;
+            text-align: left;
+        }
+
+        .content-container p{
+            transform: rotate(270deg);
+            color: black;
+            text-align: center;
+        }
+
+        footer{
+            transform: translateY(20vh);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="what-is.html">What is</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="painting.html">Painting</a></li>
+            <li><a href="make-it.html">Make it</a></li>
+        </ul>
+    </nav>
+    <div class="slider-back">
+        <div class="guide">
+            <h2>experience<br>glitch art</h2>
+            <h2>distort image<br>by draggig</h2>
+        </div>
+    </div>
+    <div class="content-container">
+        <p>make your own glitch art</p>
+    </div>
+    <div id="slider">
+        <div class="arrow left" id="prev-slide"></div>
+        <div class="arrow right" id="next-slide"></div>
+        <div class="slide" id="slide-1">
+            <div class="container horizontal-effect" data-image="22.jpg" data-version="horizontal">
+                <div class="grid-container">
+                    <img class="background-image" src="22.jpg" alt="Background Image">
+                </div>
+            </div>
+        </div>
+        <div class="slide" id="slide-2">
+            <div class="container" data-image="33.jpg" data-version="grid" style="background-image: url('33.jpg');">
+                <div class="grid-container">
+                    <img class="background-image" src="33.jpg" alt="Background Image">
+                </div>
+            </div>
+        </div>
+        <div class="slide" id="slide-3">
+            <div class="container" data-image="44.jpg" data-version="dots">
+                <div class="grid-container">
+                    <img class="background-image" src="44.jpg" alt="Background Image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="reset-button">Reset</button>
+    <div id="navigation">
+        <span class="nav-dot" data-slide="1"></span>
+        <span class="nav-dot" data-slide="2"></span>
+        <span class="nav-dot" data-slide="3"></span>
+    </div>
+    <script>
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const resetButton = document.getElementById('reset-button');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const prevSlide = document.getElementById('prev-slide');
+        const nextSlide = document.getElementById('next-slide');
+
+        let isDragging = false;
+        let startX, startY;
+        let currentGrid;
+        let currentSlide = 0;
+
+        function initializeGrids(container, image, version) {
+            const gridContainer = container.querySelector('.grid-container');
+            const containerWidth = gridContainer.clientWidth;
+            const containerHeight = gridContainer.clientHeight;
+
+            let totalGrids, gridsPerRow, gridWidth, gridHeight;
+
+            if (version === 'horizontal') {
+                totalGrids = 30;
+                gridsPerRow = 30;
+                gridWidth = containerWidth / gridsPerRow;
+                gridHeight = containerHeight;
+            } else if (version === 'grid') {
+                totalGrids = 50;
+                gridsPerRow = 10;
+                gridWidth = containerWidth / gridsPerRow;
+                gridHeight = containerHeight / 5;
+            } else if (version === 'dots') {
+                totalGrids = (containerWidth / 20) * (containerHeight / 20);
+                gridsPerRow = containerWidth / 20;
+                gridWidth = 30;
+                gridHeight = 30;
+            }
+
+            for (let i = 0; i < totalGrids; i++) {
+                const grid = document.createElement('div');
+                grid.classList.add('grid');
+                const row = Math.floor(i / gridsPerRow);
+                const col = i % gridsPerRow;
+
+                grid.style.width = `${gridWidth}px`;
+                grid.style.height = `${gridHeight}px`;
+                grid.style.left = `${col * gridWidth}px`;
+                grid.style.top = `${row * gridHeight}px`;
+
+                const img = document.createElement('img');
+                img.src = image;
+                img.style.width = `${containerWidth}px`;
+                img.style.height = `${containerHeight}px`;
+                img.style.left = `-${col * gridWidth}px`;
+                img.style.top = `-${row * gridHeight}px`;
+
+                grid.appendChild(img);
+                gridContainer.appendChild(grid);
+
+                grid.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.pageX - (parseInt(grid.dataset.offsetX) || 0);
+                    startY = e.pageY - (parseInt(grid.dataset.offsetY) || 0);
+                    currentGrid = grid;
+                    currentGrid.style.cursor = 'grabbing';
+                    currentGrid.classList.add('dragging');
+                });
+
+                grid.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    currentGrid.style.cursor = 'grab';
+                    currentGrid.classList.remove('dragging');
+                    if (currentGrid.style.transform !== 'translateX(0px) translateY(0px)') {
+                        currentGrid.classList.add('active');
+                    }
+                    currentGrid.dataset.offsetX = parseInt(currentGrid.style.transform.split('(')[1].split('px')[0]) || 0;
+                    currentGrid.dataset.offsetY = parseInt(currentGrid.style.transform.split(',')[1].split('px')[0]) || 0;
+                });
+
+                grid.addEventListener('mousemove', (e) => {
+                    if (isDragging && currentGrid === grid) {
+                        const dx = e.pageX - startX;
+                        const dy = e.pageY - startY;
+                        let newTransformX = 0;
+                        let newTransformY = 0;
+
+                        if (version === 'horizontal') {
+                            newTransformX = Math.max(-100, Math.min(100, dx));
+                            currentGrid.style.transform = `translateX(${newTransformX}px)`;
+                        } else if (version === 'grid' || version === 'dots') {
+                            newTransformX = Math.max(-100, Math.min(100, dx));
+                            newTransformY = Math.max(-100, Math.min(100, dy));
+                            currentGrid.style.transform = `translateX(${newTransformX}px) translateY(${newTransformY}px)`;
+                        }
+                    }
+                });
+
+                grid.addEventListener('mouseleave', () => {
+                    if (isDragging && currentGrid === grid) {
+                        isDragging = false;
+                        currentGrid.style.cursor = 'grab';
+                        currentGrid.classList.remove('dragging');
+                    }
+                });
+            }
+        }
+
+        slides.forEach((slide) => {
+            const container = slide.querySelector('.container');
+            const image = container.dataset.image;
+            const version = container.dataset.version;
+            initializeGrids(container, image, version);
+        });
+
+        resetButton.addEventListener('click', () => {
+            const activeSlide = document.querySelector('.slide.active');
+            const grids = activeSlide.querySelectorAll('.grid');
+
+            grids.forEach(grid => {
+                grid.style.transform = 'translateX(0px) translateY(0px)';
+                grid.dataset.offsetX = 0;
+                grid.dataset.offsetY = 0;
+                grid.classList.remove('active');
+            });
+        });
+
+        function changeSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            navDots[currentSlide].classList.remove('active');
+
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            navDots[currentSlide].classList.add('active');
+        }
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                changeSlide(index);
+            });
+        });
+
+        prevSlide.addEventListener('click', () => {
+            let newSlideIndex = (currentSlide - 1 + slides.length) % slides.length;
+            changeSlide(newSlideIndex);
+        });
+
+        nextSlide.addEventListener('click', () => {
+            let newSlideIndex = (currentSlide + 1) % slides.length;
+            changeSlide(newSlideIndex);
+        });
+
+        changeSlide(0);
+    </script>
+</body>
+<footer>
+    <div class="footer-container">
+        <div class="footer-content1">
+            <p>GLITCH ART</p>
+            <br>
+            <p>The aesthetics of technical error.</p>
+            <p>Every errors are beautiful</p>
+        </div>
+        <div class="footer-content2">
+            <p>copyright&copy; yearsnn all rights reserved.</p>
+            <br>
+            <P>Seoultech 2024</P>
+            <p>Web Programing Class</p>
+        </div>
+        <div class="footer-content3">
+            <p>contact</p>
+            <br>
+            <P>yearsnn925@gmail.com</P>
+            <p>instagram: @yearsnn</p>
+        </div>
+    </div>
+</footer>
+</html>
