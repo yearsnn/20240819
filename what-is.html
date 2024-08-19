@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>What Is - Glitch Art</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+h1,h2,p{margin: 0;}
+.slider-container{
+    width: 100vw; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background: linear-gradient(to bottom, red 45%, mintcream 55%, red 65%);
+}
+.img-container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transform: translateY(30px);
+}
+
+
+.img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: opacity 0.7s ease;
+}
+
+.inner{
+    width: 110px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.7s ease;
+}
+
+.img-container .inner:first-child, .img-container .inner:last-child{
+    height: 480px;
+    box-shadow: 0 0 10px darkred;
+}
+.img-container .inner:nth-child(2){
+    height: 560px;
+    box-shadow: 0 0 10px darkred;
+}
+h1{
+    font-size: 40px;
+    text-align: left;
+    transition: 0.7s ease;
+    opacity: 1;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    transform: rotate(270deg);
+    width: 30px;
+}
+
+.details{
+    position: absolute;
+    bottom: -100px;
+    left: 10px;
+    width: 600px;
+    height: 300px;
+}
+.details h2{
+    font-size: 26px;
+    text-align: left;
+    line-height: 44px;
+    text-transform: uppercase;
+    transition: 0.7s ease;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
+.details p{
+    font-size: 15px;
+    text-align: left;
+    line-height: 25px;
+    text-transform: uppercase;
+    transition: 0.7s ease;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    word-break: keep-all;
+}
+
+.inner.active{
+    width: 1000px !important;
+    height: 666px !important;
+    box-shadow: 0 0 10px darkred;
+    opacity: 1;
+
+}
+.inner.active h1{
+    display: none;
+}
+
+.inner:not(.active) img {
+    opacity: 0.5;
+}
+
+.inner.active .details p, .inner.active .details h2{
+    display: block;
+}
+
+.content-container{
+    position: absolute;
+    top: 53%;
+    left: -30px;
+    text-align: left;
+}
+
+.content-container p{
+    transform: rotate(270deg);
+    color: red;
+    text-align: center;
+}
+
+</style>
+</head>
+<body style="margin: 0">
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="what-is.html">What is</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="painting.html">Painting</a></li>
+            <li><a href="make-it.html">Make it</a></li>
+        </ul>
+    </nav>
+   
+    <div class="slider-container">
+        <div class="content-container">
+            <p> What is glitch art</p>
+        </div>
+        <div class="img-container">
+            <div class="inner active">
+                <img src="spi.png" alt="1">
+                <h1>meaning</h1>
+                <div class="details">
+                    <h2>about glitch art</h2>
+                    <p>글리치 아트(Glitch art)는 디지털 데이터를 손상시키거나 전자 장치를 물리적으로 조작하여 미학적 목적으로 디지털 또는 아날로그 오류를 사용하는 관행이다. 본래 글리치는 전자기적 시스템 내에서 급작스럽고 예기치 못한 전류증가로 인해 발생하는 결함을 뜻하며, 오류를 예술로 승화시킴에 따라 미디어 및 페인팅의 형태로 발전하였다.
+                </div>
+            </div>
+            <div class="inner">
+                <img src="col.jpeg" alt="2">
+                <h1>history</h1>
+                <div class="details">
+                    <h2>history of glitch art</h2>
+                    <p>글리치 아트의 역사는 컴퓨터 기술의 발전과 함께 시작되었다. 초기에는 컴퓨터 프로그램이나 하드웨어에서 발생햐는 오류나 결함이 예술적으로 활용되지 않았으나 20세기 후반부터 21세기 초반에 이르러 디지털 미디어의 오류와 결함을 실험적인 예술의 한 부분으로 간주하게 되었다.</p>
+                </div>
+            </div>
+            <div class="inner">
+                <img src="baby.jpg" alt="3">
+                <h1>now</h1>
+                <div class="details">
+                    <h2>modern glitch art</h2>
+                    <p>현대에 와서 글라치 아트는 더욱 복합적인 형태와 스타일로 나타난다. 디지털 상의 오류를 활용하는 것을 넘어 회화적 스킬을 통해 물감 등의 소재로 오류를 표현하거나 사진에 결합하는 등 하나의 기법으로 자리매김 하였다. '오류' 라는 상징성을 갖고 사회에 다양한 주제와 의미를 전달하며 발전 중에 있다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="jQuery.js"></script>
+<script>
+    jQuery(document).ready(function($){
+        
+        $('.inner').on('click', function(){
+            $('.inner').removeClass('active')
+            $(this).addClass('active');
+        })
+
+    });
+</script>
+</body>
+<footer>
+    <div class="footer-container">
+        <div class="footer-content1">
+            <p>GLITCH ART</p>
+            <br>
+            <p>The aesthetics of technical error.</p>
+            <p>Every errors are beautiful</p>
+        </div>
+        <div class="footer-content2">
+            <p>copyright&copy; yearsnn all rights reserved.</p>
+            <br>
+            <P>Seoultech 2024</P>
+            <p>Web Programing Class</p>
+        </div>
+        <div class="footer-content3">
+            <p>contact</p>
+            <br>
+            <P>yearsnn925@gmail.com</P>
+            <p>instagram: @yearsnn</p>
+        </div>
+    </div>
+</footer>
+</html>

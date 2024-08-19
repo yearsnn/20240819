@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2024yearsnn</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scaleable="yes">
+    <meta property="og:title" content="glitch art">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+        .button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .glitch-container {height: 100vh; position: relative;}
+        .glitch-main {
+            font-size: 10rem;
+            font-weight: bold;
+            position: relative;
+            color: black;
+            text-transform: uppercase;
+            top: 30px;
+            left: 10px;
+            z-index: 2;
+        }
+        .glitch-main::before,
+        .glitch-main::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: glitch 5s infinite;
+        }
+        .glitch-main::before {
+            left: 2px;
+            text-shadow: -2px 0 skyblue;
+            animation: glitch 5s infinite reverse;
+        }
+        .glitch-main::after {
+            right: 3px;
+            text-shadow: -5px 0 lightyellow;
+            animation: glitch 5s infinite;
+        }
+        @keyframes glitch {
+            0% {clip: rect(20px, 9999px, 85px, 0);}
+            10% {clip: rect(0, 29px, 10px, 0);}
+            20% {clip: rect(30px, 8009px, 60px, 0);}
+            30% {clip: rect(0, 9999px, 0, 0);}
+            40% {clip: rect(50px, 9999px, 85px, 0);}
+            50% {clip: rect(0, 9999px, 25px, 0);}
+            60% {clip: rect(80px, 500px, 0, 0);}
+            70% {clip: rect(0, 9999px, 50px, 0);}
+            80% {clip: rect(40px, 300px, 90px, 0);}
+            90% {clip: rect(0, 9999px, 65px, 0);}
+            100% {clip: rect(20px, 9999px, 80px, 0);}
+        }
+        .glitch-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url('main.webp') no-repeat center center;
+            background-size: cover;
+        }
+        .glitch-bg-content {height: 100%; width: 100%;}
+        .glitch-sub {
+            color: black;
+            z-index: 3;
+            position: absolute;
+            top: 200px;
+            left: 10px;
+            padding-right: 700px;
+            line-height: 50px;
+        }
+        .navbar {
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(1,1,1,1) 60%, rgba(1,1,1,0));
+            z-index: 10;
+        }
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            gap: 20px;
+        }
+        .navbar ul li {margin: 0;}
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .navbar ul li a:hover {color: red;}
+        #content {display: none; padding: 20px;}
+        section {
+            margin-top: 100vh;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-bg">
+        <div class="glitch-bg-content"></div>
+    </div>
+    <div class="glitch-container">
+        <div class="glitch-main" data-text="GLITCH ART">GLITCH ART</div>
+        <div class="glitch-sub">
+            <h2>(Malfunction)/ (Media)/ (digital)/ (Irregular)/ (Unexpected)</h2>
+        </div>
+    </div>
+    <div class="button" id="revertButton">Revert</div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="what-is.html">What is</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="painting.html">Painting</a></li>
+            <li><a href="make-it.html">Make it</a></li>
+        </ul>
+    </nav>
+    <script>
+    const button = document.getElementById('revertButton');
+        const glitchBg = document.querySelector('.glitch-bg');
+        const glitchMain = document.querySelector('.glitch-main');
+        const glitchSub = document.querySelector('.glitch-sub');
+        let reverted = false;
+
+        const styleElement = document.createElement('style');
+        document.head.appendChild(styleElement);
+
+        button.addEventListener('click', () => {
+            reverted = !reverted;
+            if (reverted) {
+                button.textContent = 'Undo';
+                button.style.backgroundColor = 'white';
+                button.style.color = 'black';
+                button.style.borderColor = 'black';
+                glitchBg.style.filter = 'invert(1)';
+                glitchMain.style.color = 'white';
+                glitchSub.style.color = 'white';
+                styleElement.innerHTML = '.glitch-main::after { text-shadow: -5px 0 black !important; }';
+            } else {
+                button.textContent = 'Revert';
+                button.style.backgroundColor = 'black';
+                button.style.color = 'white';
+                button.style.borderColor = 'white';
+                glitchBg.style.filter = 'none';
+                glitchMain.style.color = 'black';
+                glitchSub.style.color = 'black';
+                styleElement.innerHTML = '.glitch-main::after { text-shadow: -5px 0 lightyellow !important; }';
+            }
+        });
+    </script>
+</body>
+<footer>
+    <div class="footer-container">
+        <div class="footer-content1">
+            <p>GLITCH ART</p>
+            <br>
+            <p>The aesthetics of technical error.</p>
+            <p>Every errors are beautiful</p>
+        </div>
+        <div class="footer-content2">
+            <p>copyright&copy; yearsnn all rights reserved.</p>
+            <br>
+            <P>Seoultech 2024</P>
+            <p>Web Programing Class</p>
+        </div>
+        <div class="footer-content3">
+            <p>contact</p>
+            <br>
+            <P>yearsnn925@gmail.com</P>
+            <p>instagram: @yearsnn</p>
+        </div>
+    </div>
+</footer>
+</html>

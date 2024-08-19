@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>What Is - Glitch Art</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        html {
+            background: skyblue;
+        }
+
+        h2,p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .back-img {
+            width: 100vw;
+            height: auto;
+            position: fixed;
+        }
+
+        .back-img img {
+            width: 100vw;
+            height: auto;
+        }
+
+        .back-container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .back-top {
+            position: absolute;
+            width: 100vw;
+            height: 12vh;
+            background: skyblue;
+            z-index: 1;
+            top: 0;
+        }
+
+        .back-left {
+            position: absolute;
+            width: 5.5vw;
+            height: 66vh;
+            background: skyblue;
+            z-index: 1;
+            top: 12vh;
+        }
+
+        .back-right {
+            position: absolute;
+            width: 60vw;
+            height: 66vh;
+            background: skyblue;
+            z-index: 1;
+            right: 0;
+            top: 12vh;
+        }
+
+        .back-bottom {
+            position: absolute;
+            width: 100vw;
+            height: 70vh;
+            background: linear-gradient(to bottom, rgba(135, 206, 235, 1) 0%, rgba(135, 206, 235, 0) 100%);
+            z-index: 1;
+            right: 0;
+            top: 78vh;
+        }
+
+        .media-container {
+            width: 60vw;
+            position: absolute;
+            right: -5vw;
+            top: 12vh;
+            z-index: 10;
+            color: black;
+        }
+
+        .media-text1 {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+            width: 50vw;
+            word-break: keep-all;
+        }
+
+        .media-text1 h2, .media-text2 h2{
+            padding-bottom: 15px;
+        }
+
+        .media-text2 {
+            display: flex;
+            flex-direction: column;
+            width: 50vw;
+            word-break: keep-all;
+        }
+
+        .media-text1 p {
+            line-height: 25px;
+        }
+
+        .media-text2 p {
+            padding-bottom: 5px;
+            line-height: 25px;
+        }
+
+        .gallery-container {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; 
+            transition: opacity 1s ease-in-out; 
+            margin-bottom: 50px;
+        }
+
+        .gallery-container.visible {
+            opacity: 1; 
+        }
+
+        .main-image-container {
+            width: 74vw;
+            height: 40vw;
+            position: relative;
+            z-index: 100;
+            transition: opacity 0.5s ease-in-out; 
+        }
+
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out; 
+        }
+
+        .image-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: opacity 0.5s ease-in-out; 
+            opacity: 1; 
+        }
+
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 5px;
+            width: 14vw;
+            height: 35vw;
+            margin-left: 10px;
+            z-index: 100;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+       
+        .collapsible {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: center;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 2px solid white;
+        }
+
+        .collapsible:hover {
+            background-color: white;
+            border: 2px solid black;
+            color: black;
+        }
+
+        .collapsible-content {
+            display: none;
+            overflow: hidden;
+            padding: 0 18px;
+            margin-bottom: 5px;
+        }
+
+        .collapsible-content p {
+            margin: 10px 0;
+            line-height: 25px;
+        }
+
+        .content-container{
+            position: fixed;
+            top: 53%;
+            left: -30px;
+            text-align: left;
+            z-index: 50;
+        }
+
+        .content-container p{
+            transform: rotate(270deg);
+            color: black;
+            text-align: center;
+            font-size: 15px;
+            text-align: left;
+            line-height: 25px;
+        }
+
+        footer{
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="what-is.html">What is</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="painting.html">Painting</a></li>
+            <li><a href="make-it.html">Make it</a></li>
+        </ul>
+    </nav>
+    <div class="back-img">
+        <img src="back.webp">
+    </div>
+    <div class="back-container">
+        <div class="back-top"></div>
+        <div class="back-left"></div>
+        <div class="back-right"></div>
+        <div class="back-bottom"></div>
+        <div class="media-container">
+            <div class="media-text1">
+                <h2>GLITCH ART IN MEDIA</h2>
+                <p>컴퓨터 그래픽과 디지털 예술의 결함, 의도적인 오류를 활용하는 글리치 아트는 미디어를 주 매체로 활용힌다. 예술가들은 디지털 데이터를 조작하거나 물리적으로 전자장치를 변형해 오류를 발생시킨다. 왜곡을
+                    주 시각요소로 활용함에 따라, 이미지 뿐만 아니라 비디오를 왜곡하고 오디오에 잡음을 더해 새로운 시각적 감각을 제공한다. 미디어에서의 글리치 아트는 다양한 기법으로 만들어진다.</p>
+            </div>
+            <div class="media-text2">
+                <h2>Various Techniques of Glitch Art</h2>
+                <button class="collapsible">Data Bending</button>
+                <div class="collapsible-content">
+                    <p>이미지 파일의 데이터를 직접 수정하여 글리치 효과를 만들어낸다. 텍스트 에디터 혹은 특수 소프트웨어를 통해 색상을 왜곡 시키거나 무작위적인 패턴을 생성한다.</p>
+                </div>
+                <button class="collapsible">Pixel Skipping</button>
+                <div class="collapsible-content">
+                    <p>이미지를 픽셀로 구분하여 그 중 일부를 무작위로 변경하여 불규칙적인 패턴을 구성한다.이미지 편집 소프트웨어를 통해 일부 픽셀을 건너뛰거나 변형한다.</p>
+                </div>
+                <button class="collapsible">Digital Noise Filters</button>
+                <div class="collapsible-content">
+                    <p>글리치 효과가 적용되는 필터를 이미지에 적용해 노이즈 및 색상이 추가되며 글리치가 형성된다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-container">
+            <p>Glitch art in Media</p>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery-container" id="gallery">
+        <div class="main-image-container" id="main-image">
+            <img src="image1.jpg" alt="Main Image">
+            <div class="image-info">Title: etcetera<br> Artist: Solhwee Park</div>
+        </div>
+        <div class="thumbnail-container">
+            <img src="image1.jpg" alt="Image 1" onclick="showImage('image1.jpg', 'etcetera', 'Solhwee Park')">
+            <img src="image2.jpg" alt="Image 2" onclick="showImage('image2.jpg', 'News', 'Solhwee Park')">
+            <img src="image3.jpg" alt="Image 3" onclick="showImage('image3.jpg', 'A Vernacular of File Formats', 'Rosa Menkman')">
+            <img src="image4.jpg" alt="Image 4" onclick="showImage('image4.jpg', 'Into Time', 'Rafael Rozendaal')">
+            <img src="image5.jpg" alt="Image 5" onclick="showImage('image5.jpg', 'Quasimondo', 'Mario Klingemann')">
+            <img src="image6.jpg" alt="Image 6" onclick="showImage('image6.jpg', 'PNG encoded by an incorrectly implemented method (truecolor / interlaced) #50076', 'ucnv')">
+            <img src="image7.jpg" alt="Image 7" onclick="showImage('image7.jpg', 'Apeiron', 'PHILLIP STEARNS')">
+            <img src="image8.jpg" alt="Image 8" onclick="showImage('image8.jpg', 'De beaux glitch obtenus en brisant un écran LCD', 'TMenkman/Jodi')">
+            <img src="image9.jpg" alt="Image 9" onclick="showImage('image9.jpg', 'Such is the Power of the Empty Lot', 'ERON RAUCH')">
+            <img src="image10.jpg" alt="Image 10" onclick="showImage('image10.jpg', 'god knox', 'KOKOFREAKBEAN')">
+        </div>
+    </div>
+
+    <script>
+        function checkVisibility() {
+            var gallery = document.getElementById('gallery');
+            var galleryPosition = gallery.getBoundingClientRect().top;
+            var windowHeight = window.innerHeight;
+
+        
+            if (galleryPosition < windowHeight) {
+                gallery.classList.add('visible');
+            }
+        }
+
+       
+        window.addEventListener('scroll', checkVisibility);
+
+        checkVisibility();
+
+       
+        function showImage(src, title, artist) {
+            var mainImage = document.querySelector('#main-image img');
+            var imageInfo = document.querySelector('.image-info');
+
+            
+            mainImage.style.opacity = 0;
+            imageInfo.style.opacity = 0;
+
+            
+            setTimeout(function() {
+                mainImage.src = src;
+                imageInfo.innerHTML = 'Title: ' + title + '<br> Artist: ' + artist;
+
+                mainImage.style.opacity = 1;
+                imageInfo.style.opacity = 1;
+            }, 500); 
+        }
+
+        // Toggle functionality for collapsible sections
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                
+                var content = this.nextElementSibling;
+
+                for (var j = 0; j < coll.length; j++) {
+                    if (coll[j] !== this) {
+                        coll[j].classList.remove("active");
+                        coll[j].nextElementSibling.style.display = "none";
+                    }
+                }
+
+                this.classList.toggle("active");
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+<footer>
+    <div class="footer-container">
+        <div class="footer-content1">
+            <p>GLITCH ART</p>
+            <br>
+            <p>The aesthetics of technical error.</p>
+            <p>Every errors are beautiful</p>
+        </div>
+        <div class="footer-content2">
+            <p>copyright&copy; yearsnn all rights reserved.</p>
+            <br>
+            <P>Seoultech 2024</P>
+            <p>Web Programing Class</p>
+        </div>
+        <div class="footer-content3">
+            <p>contact</p>
+            <br>
+            <P>yearsnn925@gmail.com</P>
+            <p>instagram: @yearsnn</p>
+        </div>
+    </div>
+</footer>
+</html>
